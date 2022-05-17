@@ -11,10 +11,9 @@ function mainMenu () {
   { type: 'list',
   message: 'What would you like to do?',
   name: 'option',
-  choices: ['View all departments', 'view all roles', 'View all employees', 'Update an employee role', 'Quit'], 
+  choices: ['View all departments', 'view all roles', 'View all employees', 'Update an employee role', 'Add a department', 'Add a roll', 'Add an employee', 'Quit'], 
  }
-])
-.then(answers => {
+]).then(answers => {
 switch(answers.option){
  case 'View all departments': 
  viewAllDepartments()
@@ -32,11 +31,22 @@ switch(answers.option){
   updateEmployeeRole()
   break;  
 
+  case 'Add a department': 
+  addADepartment()
+  break;
+
+  case  'Add a roll':
+  addARoll()
+  break;
+          
+  case  'Add an employee':
+  addAnEmployee()
+  break;
+
 default:
   db.end()
 }
 });
-}
 
 mainMenu()
 
@@ -61,6 +71,7 @@ function viewAllRoles (){
     }
   )};
 
+
   function viewAllEmployees(){
     db.query(
       'SELECT * FROM `employee`',
@@ -69,6 +80,7 @@ function viewAllRoles (){
         mainMenu();
       }
     )};
+
 
     function  updateEmployeeRole(){
       db.query(
@@ -80,49 +92,28 @@ function viewAllRoles (){
       )};
 
 
-
-
-  
-
-    function addingMenu () {
-      inquirer
-    .prompt([
-      {
-        type: 'input',
-        message: 'What would you like to do?',
-        choices:[ 'Add a department', 'Add a roll', 'Add an employee'],
-      },
-    ])
-    .then(answers => {
-      switch(answers.option){
-       case 'Add a department': 
-       addADepartment()
-       break;
-
-        case  'Add a roll':
-        addARoll()
-        break;
-          
-        case  'Add an employee':
-        addAnEmployee()
-        break;
-      }
-    });
-    }
-
-   
-
-
-
-          
     function addADepartment() {
-      db.query(
-        'SELECT * FROM `department`',
-        function(err, results, fields) {
-          console.log(results); 
-          mainMenu();
+     inquirer.prompt([
+        {
+          type: 'input',
+          message: 'What is the name of the new department you would like to add?',
+          name: 'adding',
+     
         }
-      )};
+      ]).then(function(answer){
+        Connection.query(
+          "INSERT INTO department(name)",
+          [answer.department],
+          function(err, results, fields) {
+          console.log(New department added); 
+          
+              mainMenu();
+            }
+            )
+         });
+
+         
+  
 
   
       function addARoll() {
