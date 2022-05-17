@@ -8,7 +8,7 @@ INSERT INTO role (id, title, salary, department_id)
 VALUES (1, "Software Engineer", 30.000, 1  ),
        (2, "Accountant", 35.000, 2 ),
        (3, "Solicitor", 40.000, 3 ),
-       (4, "Kokib", 60.000, 4);
+       (4, "SalesRep", 60.000, 4);
        
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)

@@ -11,7 +11,7 @@ function mainMenu () {
   { type: 'list',
   message: 'What would you like to do?',
   name: 'option',
-  choices: ['View all departments', 'view all roles', 'View all employees', 'Add a department', 'Add a roll', 'Add an employee', 'Update an employee role', 'Quit'], 
+  choices: ['View all departments', 'view all roles', 'View all employees', 'Update an employee role', 'Quit'], 
  }
 ])
 .then(answers => {
@@ -28,18 +28,6 @@ switch(answers.option){
   viewAllEmployees()
   break;
 
-  case 'add a department':
-  addADepartment()
-  break;
- 
-  case  'Add a roll':
-  addARoll()
-  break;
-    
-  case  'Add an employee':
-  addAnEmployee()
-  break;
-      
   case 'Update an employee role':
   updateEmployeeRole()
   break;  
@@ -60,9 +48,7 @@ db.query(
   function(err, results) {
     console.log(results); 
     mainMenu();
-
   }
-  
 )};
 
 
@@ -84,8 +70,7 @@ function viewAllRoles (){
       }
     )};
 
-
-    function addADepartment(){
+    function  updateEmployeeRole(){
       db.query(
         'SELECT * FROM `employee`',
         function(err, results, fields) {
@@ -93,12 +78,56 @@ function viewAllRoles (){
           mainMenu();
         }
       )};
+
+
+
+
   
 
+    function addingMenu () {
+      inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: 'What would you like to do?',
+        choices:[ 'Add a department', 'Add a roll', 'Add an employee'],
+      },
+    ])
+    .then(answers => {
+      switch(answers.option){
+       case 'Add a department': 
+       addADepartment()
+       break;
 
+        case  'Add a roll':
+        addARoll()
+        break;
+          
+        case  'Add an employee':
+        addAnEmployee()
+        break;
+      }
+    });
+    }
+
+   
+
+
+
+          
+    function addADepartment() {
+      db.query(
+        'SELECT * FROM `department`',
+        function(err, results, fields) {
+          console.log(results); 
+          mainMenu();
+        }
+      )};
+
+  
       function addARoll() {
         db.query(
-          'SELECT * FROM `employee`',
+          'SELECT * FROM `role`',
           function(err, results, fields) {
             console.log(results); 
             mainMenu();
@@ -116,15 +145,7 @@ function viewAllRoles (){
           )};
     
 
-          function  updateEmployeeRole(){
-            db.query(
-              'SELECT * FROM `employee`',
-              function(err, results, fields) {
-                console.log(results); 
-                mainMenu();
-              }
-            )};
-      
+         
          
 
 
