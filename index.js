@@ -27,10 +27,6 @@ switch(answers.option){
   viewAllEmployees()
   break;
 
-  case 'Update an employee role':
-  updateEmployeeRole()
-  break;  
-
   case 'Add a department': 
   addADepartment()
   break;
@@ -42,6 +38,10 @@ switch(answers.option){
   case  'Add an employee':
   addAnEmployee()
   break;
+
+  case 'Update an employee role':
+  updateEmployeeRole()
+  break;  
 
 
 }
@@ -86,16 +86,7 @@ function viewAllRoles (){
     )};
 
 
-    // function  updateEmployeeRole(){
-    //   db.query(
-    //     'SELECT * FROM `employee`',
-    //     (err, results) =>{
-    //       console.log(results); 
-    //       mainMenu();
-    //     }
-    //   )};
-
-
+  
     function addADepartment() {
      inquirer.prompt([
         {
@@ -210,19 +201,29 @@ function viewAllRoles (){
             },
 
           ]).then(( answers ) => {
-            db.query('insert into employee SET', {
+            db.query('insert into employee SET ?', {
               first_name: answers.firstName, 
               last_name: answers.surname,
               role_id: answers.roleChoice
             }, (err,res) => {
               if (err) throw err;
               console.log ('The employee has been successfully added to the database')
+              mainMenu()
             } )
           })
           
         })
         } 
 
+
+  // function  updateEmployeeRole(){
+    //   db.query(
+    //     'SELECT * FROM `employee`',
+    //     (err, results) =>{
+    //       console.log(results); 
+    //       mainMenu();
+    //     }
+    //   )};
 
 
         
