@@ -8,11 +8,10 @@ Because this application won’t be deployed, you’ll also need to create a wal
 
 ## User Story
 
-```md
 AS A business owner
 I WANT to be able to view and manage the departments, roles, and employees in my company
 SO THAT I can organize and plan my business
-```
+
 
 ## Acceptance Criteria
 
